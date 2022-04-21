@@ -1,160 +1,109 @@
 import Head from 'next/head'
-import Square from "../components/Square"
-import { useState } from "react"
+import styles from "../styles/Home.module.css"
+import { useEffect, useState } from "react";
 
-const styles = {
-    status: {
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        margin: '0 auto',
-        width: '100%',
-        textAlign: 'center'
-    },
-    board: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    square: {
-        width: '100px',
-        height: '100px',
-        border: '1px solid #ccc',
-        margin: '0 auto',
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        cursor: 'pointer'
-    },
-    title: {
-        fontSize: '2rem',
-        fontWeight: 'bold',
-        margin: '0 auto',
-        width: '100%',
-        textAlign: 'center'
+const Square = (props) => {
+    if (!props.value) {
+      return (
+        <button
+          className="square"
+          onClick={props.onClick}
+          disabled={Boolean(props.winner)}
+        />
+      );
     }
-}
-
-export default function Home() {
-    const [board, setBoard] = useState(Array(9).fill(null))
-    const [turn, setTurn] = useState(true)
-    const [winner, setWinner] = useState(null)
-    const [draw, setDraw] = useState(false)
-    const [gameOver, setGameOver] = useState(false)
-    const [computer, setComputer] = useState(false)
-    const [computerTurn, setComputerTurn] = useState(false)
-    const [computerMove, setComputerMove] = useState(null)
-
-    const handleClick = (index) => {
-      checkWinner()
-        if (winner || draw || gameOver) {
-            return
-        }
-        if (board[index] !== null) {
-            return
-        }
-        if (turn) {
-            setBoard(board.map((square, i) => i === index ? "X" : square))
-            setTurn(false)
-        } else {
-            setBoard(board.map((square, i) => i === index ? "O" : square))
-            setTurn(true)
-        }
-    }
-
-    const checkWinner = () => {
-        const winningCombinations = [
-            [0, 1, 2],
-            [3, 4, 5],  
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ]
-        for (let i = 0; i < winningCombinations.length; i++) {
-            const [a, b, c] = winningCombinations[i]
-            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                setWinner(board[a])
-                setGameOver(true)
-                return  
-            }
-        }
-        if (board.every(square => square !== null)) {
-            setDraw(true)
-            setGameOver(true) 
-            return
-        }
-        return null
-    }
-
-    const handleComputer = () => {
-        setComputer(true)
-        setComputerTurn(true)
-       let moves = [];
-       for (let i = 0; i < board.length; i++) {
-            if (board[i] === null) {
-                moves.push(i);
-            }
-        }
-        const move = moves[Math.floor((Math.random()*moves.length))]
-        setComputerMove(move)
-        handleClick(computerMove)
-        checkWinner()
-        setComputerTurn(false)
-        setComputer(false)
-    }
-
-    const handleRestart = () => {
-        setBoard(Array(9).fill(null))
-        setWinner(null)
-        setDraw(false)
-        setGameOver(false)
-        setComputer(false)
-        setComputerTurn(false)
-        setComputerMove(null)
-    }
-
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Tic Tac Toe</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <div className={styles.title}>
-                <h1>Tic Tac Toe</h1>
-            </div>
-            <div className={styles.board}>
-                <div className={styles.row}>
-                    <Square value={board[0]} onClick={() => handleClick(0)} />
-                    <Square value={board[1]} onClick={() => handleClick(1)} /> 
-                    <Square value={board[2]} onClick={() => handleClick(2)} />
-                </div>
-                <div className={styles.row}>
-                    <Square value={board[3]} onClick={() => handleClick(3)} />
-                    <Square value={board[4]} onClick={() => handleClick(4)} /> 
-                    <Square value={board[5]} onClick={() => handleClick(5)} />
-                </div>
-                <div className={styles.row}>
-                    <Square value={board[6]} onClick={() => handleClick(6)} />
-                    <Square value={board[7]} onClick={() => handleClick(7)} />
-                    <Square value={board[8]} onClick={() => handleClick(8)} />
-                </div>
-            </div>
-            <div className={styles.status}>
-                {winner && <h2>{winner} wins!</h2>}
-                {draw && <h2>Draw!</h2>}
-                {gameOver && <h2>Game Over!</h2>}
-                {computer && <h2>Computer&apos;s Turn</h2>}
-                {computerTurn && <h2>Computer&apos;s Turn</h2>}
-                {!computer && !computerTurn && <h2>Your Turn</h2>}
-                {!computer && !computerTurn && <button onClick={() => handleComputer()}>Computer&apos;s Turn</button>}
-                {!computer && !computerTurn && <button onClick={() => handleRestart()}>Restart</button>}
-            </div>
-        </div>
-    )
+      <button className={`square square_${props.value.toLocaleLowerCase()}`} disabled>
+        {props.value}
+      </button>
+    );
+  };
+  
+  function checkWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
+   
+  function Board() {
+      const [squares, setSquares] = useState(Array(9).fill(null));
+      const [currentPlayer, setCurrentPlayer] = useState(
+          Math.round(Math.random() * 1) === 1 ? "X" : "O"
+      );
+      const [winner, setWinner] = useState(null);
+  
+      function setSquare(i) {
+          const squaresCopy = [...squares];
+          if (winner || squaresCopy[i]) {
+              return;
+          }
+          squaresCopy[i] = currentPlayer;
+          setSquares(squaresCopy);
+          setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+      }
+  
+      function restart() {
+          setSquares(Array(9).fill(null));
+          setWinner(null)
+      }
+  
+      useEffect(() => {
+          const winner = checkWinner(squares);
+          if (winner) {
+              setWinner(winner);
+          }
+          if (!winner && !squares.filter((square) => !square).length) {
+              setWinner("draw");
+          }
+      })
+  
+      return (
+          <div className="board-main">
+              <div className="title"> Player {currentPlayer}&apos;s turn </div>
+              {winner && winner != "draw" && <p>Congratulations {winner}, you have won!</p>}
+              {winner && winner == "draw" && <p>It&apos;s a draw!</p>}
+              <div className="grid">
+                  {squares.map((square, i) => (
+                      <Square
+                          key={i}
+                          value={square}
+                          onClick={() => setSquare(i)}
+                          winner={winner}
+                      />
+                  ))}
+              </div>
+              <button className="restart" onClick={restart}>Restart</button>
+          </div>
+      );
+  }
+ 
+
+const Home = () => {
+   return (
+     <div className={styles.container}>
+      <Head>
+        <title>Tic Tac Toe</title>
+      </Head>
+
+      <main className={styles.main}>
+          <Board />
+      </main>
+    </div>
+   )
 }
 
+export default Home
