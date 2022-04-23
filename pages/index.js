@@ -74,7 +74,7 @@ const Square = (props) => {
       return (
           <div className="board-main">
               <div className="title"> Player {currentPlayer}&apos;s turn </div>
-              {winner && winner != "draw" && <p>Congratulations {winner}, you have won!</p>}
+              {winner && winner != "draw" && <p>{winner} won!</p>}
               {winner && winner == "draw" && <p>It&apos;s a draw!</p>}
               <div className="grid">
                   {squares.map((square, i) => (

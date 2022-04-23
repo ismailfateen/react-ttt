@@ -1,15 +1,14 @@
 .grid{
   display: grid;
-  grid-gap: 1px;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 0fr);
+  margin: 0 10vw 0 10vw;
 }
 
 .square{
   width: 10vw;
   height: 10vw;
-  border-radius: 2vw;
   border-color: green;
-  font-size: 5vw;
+  font-size: 3vw;
   font-weight: 900;
   background-color: white;
 }
@@ -32,6 +31,13 @@
 p{
   text-align: center;
   font-weight: bold;
-  margin: 0 0 20px 0;
-  color: coral;
+  margin: 0 0 10px 0;
+  color: black;
+}
+
+.restart {
+  margin-left: 47%;
+  margin-right: 47%;
+  margin-top: 2.5%;
+  align-items: center;
 }
