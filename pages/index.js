@@ -112,7 +112,7 @@ const Square = (props) => {
                   restart()
   }} isVisible={modalIsVisible} />}
               <>
-              {currentPlayer && <h1 className={currentPlayer.toLowerCase() + "turn"}>&nbsp;{currentPlayer}</h1>}
+              {currentPlayer  && !modalIsVisible && <h1 className={currentPlayer.toLowerCase() + "turn"}>&nbsp;{currentPlayer}</h1>}
               </>
               {!modalIsVisible && <div className="grid">
                   {squares.map((square, i) => (
