@@ -2,18 +2,43 @@ import Head from 'next/head'
 import styles from "../styles/Home.module.css"
 import { useEffect, useState } from "react";
 
+const MODAL_TYPES = {
+  0: "It's a draw",
+  1: "X",
+  2: "O"
+}
+
+const Modal = ({ type, onClose, isVisible }) => {
+  return (
+    <div className="modalBG">
+      <div className="modal_container">
+        <div className="modal_content">
+          <h1>
+            {MODAL_TYPES[type]}{MODAL_TYPES[type] !== "It's a draw" ? " won!" : "!"}
+          </h1>
+          <div className="footer">
+            <button className="close" onClick={onClose}>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+};
+
+
+
 const Square = (props) => {
     if (!props.value) {
       return (
         <button
-          className="square"
+          className={`square sus_${props.sus}`}
           onClick={props.onClick}
           disabled={Boolean(props.winner)}
         />
       );
     }
     return (
-      <button className={`square square_${props.value.toLocaleLowerCase()}`} disabled>
+      <button className={`square sus_${props.sus} square_${props.value.toLocaleLowerCase()}`} disabled>
         {props.value}
       </button>
     );
@@ -40,20 +65,25 @@ const Square = (props) => {
   }
    
   function Board() {
+    const [modalIsVisible, setModal] = useState(false);
       const [squares, setSquares] = useState(Array(9).fill(null));
       const [currentPlayer, setCurrentPlayer] = useState(
           Math.round(Math.random() * 1) === 1 ? "X" : "O"
       );
       const [winner, setWinner] = useState(null);
   
-      function setSquare(i) {
+     function setSquare(i) {
           const squaresCopy = [...squares];
           if (winner || squaresCopy[i]) {
               return;
           }
           squaresCopy[i] = currentPlayer;
           setSquares(squaresCopy);
+          if (checkWinner(squaresCopy)) {
+              setModal(true);
+          } else {
           setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+          }
       }
   
       function restart() {
@@ -64,22 +94,30 @@ const Square = (props) => {
       useEffect(() => {
           const winner = checkWinner(squares);
           if (winner) {
-              setWinner(winner);
+              setModal(true)
+              setWinner(winner)
           }
           if (!winner && !squares.filter((square) => !square).length) {
               setWinner("draw");
+              setModal(true)
           }
       })
   
       return (
           <div className="board-main">
               <div className="title"> Player {currentPlayer}&apos;s turn </div>
+              {modalIsVisible && <Modal type={winner === "X" ? 1 : winner === "O" ? 2 : winner === "draw" ? 0 : false} onClose={() => 
+                {
+                  setModal(false)
+                  restart()
+  }} isVisible={modalIsVisible} />}
               {winner && winner != "draw" && <p>{winner} won!</p>}
               {winner && winner == "draw" && <p>It&apos;s a draw!</p>}
               <div className="grid">
                   {squares.map((square, i) => (
                       <Square
                           key={i}
+                          sus={i}
                           value={square}
                           onClick={() => setSquare(i)}
                           winner={winner}

@@ -4,21 +4,40 @@
   margin: 0 10vw 0 10vw;
 }
 
+.modalBG {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_container {
+  /* background-color: #1E2429; */
+  flex-direction: column;
+  padding: 100px;
+}
+
+.modal_content {
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+}
+
 .square{
   width: 10vw;
   height: 10vw;
-  border-color: green;
-  font-size: 3vw;
-  font-weight: 900;
-  background-color: white;
+  font-size: 5vw;
+  font-weight: 700;
+  background-color: black;
 }
 
-.square_o{
-  color: blue;
+.square_x {
+  color: lightcyan;
 }
 
-.square_x{
-  color: red;
+.square_o {
+ color: lightgrey;
 }
 
 .title{
@@ -32,7 +51,7 @@ p{
   text-align: center;
   font-weight: bold;
   margin: 0 0 10px 0;
-  color: black;
+  color: white;
 }
 
 .restart {
@@ -41,3 +60,33 @@ p{
   margin-top: 2.5%;
   align-items: center;
 }
+
+.sus_0 {
+  border-left: white;
+  border-top: white;
+}
+
+.sus_1 {
+  border-top: white;
+}
+
+.sus_2 {
+  border-top: white;
+  border-right: white;
+}
+
+.sus_3 {
+  border-left: white;
+}
+
+.sus_5 {
+  border-right: white;
+}
+
+.sus_6 {
+  border-left: white;
+  border-bottom: white;
+}
+
+.sus_7{border-bottom: white;}
+.sus_8{border-right: white; border-bottom: white;}
