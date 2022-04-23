@@ -1,7 +1,9 @@
 .grid{
   display: grid;
   grid-template-columns: repeat(3, 0fr);
-  margin: 0 10vw 0 10vw;
+
+  width: 100%;
+  justify-content: center;
 }
 
 .modalBG {
@@ -21,23 +23,19 @@
 .xturn {
   font-weight: bolder;
   border-radius: 30vw;
-  align-items: center;
-  width: 2vw;
-  padding: 10px;
+  display: flex;
   color: #F36478;
-  justify-content: center;
-  margin: 0 auto;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .oturn {
   font-weight: bolder;
   border-radius: 30vw;
-  align-items: center;
-  width: 2vw;
-  padding: 10px;
+  display: flex;
   color: #5BA8EB;
-  justify-content: center;
-  margin: 0 auto;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .modal_content {

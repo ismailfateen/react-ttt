@@ -125,7 +125,6 @@ const Square = (props) => {
                       />
                   ))}
               </div>
-              <button className="restart" onClick={restart}>Restart</button>
           </div>
       );
   }
