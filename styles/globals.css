@@ -18,6 +18,28 @@
   padding: 100px;
 }
 
+.xturn {
+  font-weight: bolder;
+  border-radius: 30vw;
+  align-items: center;
+  width: 2vw;
+  padding: 10px;
+  color: #F36478;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.oturn {
+  font-weight: bolder;
+  border-radius: 30vw;
+  align-items: center;
+  width: 2vw;
+  padding: 10px;
+  color: #5BA8EB;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .modal_content {
   text-align: center;
   margin-top: 10px;

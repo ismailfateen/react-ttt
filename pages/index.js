@@ -111,8 +111,9 @@ const Square = (props) => {
                   setModal(false)
                   restart()
   }} isVisible={modalIsVisible} />}
-              {winner && winner != "draw" && <p>{winner} won!</p>}
-              {winner && winner == "draw" && <p>It&apos;s a draw!</p>}
+              <>
+              {currentPlayer && <h1 className={currentPlayer.toLowerCase() + "turn"}>&nbsp;{currentPlayer}</h1>}
+              </>
               <div className="grid">
                   {squares.map((square, i) => (
                       <Square
