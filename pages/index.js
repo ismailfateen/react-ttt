@@ -114,7 +114,7 @@ const Square = (props) => {
               <>
               {currentPlayer && <h1 className={currentPlayer.toLowerCase() + "turn"}>&nbsp;{currentPlayer}</h1>}
               </>
-              <div className="grid">
+              {!modalIsVisible && <div className="grid">
                   {squares.map((square, i) => (
                       <Square
                           key={i}
@@ -124,7 +124,7 @@ const Square = (props) => {
                           winner={winner}
                       />
                   ))}
-              </div>
+              </div>}
           </div>
       );
   }
