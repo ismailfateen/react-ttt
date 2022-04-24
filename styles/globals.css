@@ -69,6 +69,14 @@
   color: white;
 }
 
+.square:disabled:hover {
+  background-color: black;
+}
+
+.square:hover {
+  background-color: rgba(97, 93, 93, 0.2);
+}
+
 .square{
   width: 20vh;
   height: 20vh;
