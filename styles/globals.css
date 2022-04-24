@@ -2,8 +2,9 @@
   display: grid;
   grid-template-columns: repeat(3, 0fr);
 
-  width: 100%;
   justify-content: center;
+  align-items: center;
+
 }
 
 .modalBG {
@@ -12,6 +13,32 @@
   background: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
+}
+
+.winner {
+  font-size: 5vh;
+}
+
+.winner_X {
+  color: #F36478; 
+}
+
+.winner_O {
+  color: #5BA8EB;
+}
+
+.close {
+  font-size: 1.2vw;
+  border: 2px;
+  background-color: black;
+}
+
+.closeX {
+  color: #F36478;
+}
+
+.closeO {
+  color:#5BA8EB;
 }
 
 .modal_container {
@@ -45,19 +72,19 @@
 }
 
 .square{
-  width: 10vw;
-  height: 10vw;
-  font-size: 5vw;
+  width: 25vh;
+  height: 25vh;
+  font-size: 8vw;
   font-weight: 700;
   background-color: black;
 }
 
 .square_x {
-  color: lightcyan;
+  color: #F36478;
 }
 
 .square_o {
- color: lightgrey;
+ color: #5BA8EB;
 }
 
 .title{

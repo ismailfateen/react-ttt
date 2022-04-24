@@ -13,11 +13,11 @@ const Modal = ({ type, onClose, isVisible }) => {
     <div className="modalBG">
       <div className="modal_container">
         <div className="modal_content">
-          <h1>
+          <h1 className={`winner winner_${MODAL_TYPES[type] !== "It's a draw" ? MODAL_TYPES[type] : "O"}`}>
             {MODAL_TYPES[type]}{MODAL_TYPES[type] !== "It's a draw" ? " won!" : "!"}
           </h1>
           <div className="footer">
-            <button className="close" onClick={onClose}>Close</button>
+            <button className={`close close${MODAL_TYPES[type] !== "It's a draw" ? MODAL_TYPES[type] : "O"}`} onClick={onClose}>Close</button>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ const Square = (props) => {
               setWinner("draw");
               setModal(true)
           }
-      })
+      }, [squares])
   
       return (
           <div className="board-main">
