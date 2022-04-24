@@ -28,7 +28,7 @@
 }
 
 .close {
-  font-size: 1.2vw;
+  font-size: 20px;
   border: 2px;
   background-color: black;
 }
@@ -72,8 +72,8 @@
 }
 
 .square{
-  width: 25vh;
-  height: 25vh;
+  width: 20vh;
+  height: 20vh;
   font-size: 8vw;
   font-weight: 700;
   background-color: black;
